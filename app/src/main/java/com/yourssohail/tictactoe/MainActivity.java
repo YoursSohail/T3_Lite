@@ -230,6 +230,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             setName();
             setBackgroundColor(colorId);
+            updatePointText();
             this.recreate();
         }
     }
