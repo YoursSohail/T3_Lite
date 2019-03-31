@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimaryGreen</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkGreen</item>
         <item name="colorAccent">@color/colorAccentGreen</item>
+
     </style>
 
     <style name="OrangeTheme" parent="Base.AppTheme.Orange"></style>

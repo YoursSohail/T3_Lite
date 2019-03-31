@@ -10,7 +10,7 @@
             android:entryValues="@array/theme_options"
             android:key="color_choices"
             android:title="Choose a theme color"
-            android:summary="Choosea theme to be used throughout the application"/>
+            android:summary="Choose a theme to be used throughout the application"/>
     </PreferenceCategory>
     <PreferenceCategory android:title="Change player names">
 
