@@ -5,8 +5,11 @@ import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,20 +31,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView btReset;
     private TextView tvPlayer1,tvPlayer2;
     final int SETTINGS_ACTIVITY = 1;
-    Drawable bt_bg;
+    String prefPlayer1Name,prefPlayer2Name;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setTheme();
         setContentView(R.layout.activity_main);
 
-
-
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Tic Tac Toe Lite");
 
         tvPlayer1 = findViewById(R.id.tvPlayer1);
         tvPlayer2 = findViewById(R.id.tvPlayer2);
+
+        setName();
 
         for(int i=0;i<3;i++){
             for(int j=0;j<3;j++){
@@ -53,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
-         btReset = findViewById(R.id.btReset);
+        btReset = findViewById(R.id.btReset);
         btReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void player1Wins() {
         player1Points++;
-        Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, prefPlayer1Name+" wins!", Toast.LENGTH_SHORT).show();
         updatePointText();
         resetBoard();
     }
@@ -104,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void player2Wins() {
         player2Points++;
-        Toast.makeText(this, "Player 2 wins!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, prefPlayer2Name+" wins!", Toast.LENGTH_SHORT).show();
         updatePointText();
         resetBoard();
 
@@ -116,8 +119,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void updatePointText() {
-        tvPlayer1.setText("Player 1: "+player1Points);
-        tvPlayer2.setText("Player 2: "+player2Points);
+        tvPlayer1.setText(prefPlayer1Name+": "+player1Points);
+        tvPlayer2.setText(prefPlayer2Name+": "+player2Points);
     }
 
     private void resetBoard(){
@@ -215,16 +218,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == SETTINGS_ACTIVITY){
+
             this.recreate();
         }
     }
 
+
     public void setTheme(){
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
-
         if(sp.getString("color_choices","Green").equals("Green")){
             setTheme(R.style.GreenTheme);
+
 
         }else if(sp.getString("color_choices","Orange").equals("Orange")){
             setTheme(R.style.OrangeTheme);
@@ -239,5 +244,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             setTheme(R.style.YellowTheme);
 
         }
+    }
+
+    private void setName(){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+
+        prefPlayer1Name = sp.getString("change_player1_name","Player 1");
+        tvPlayer1.setText(prefPlayer1Name+": 0");
+
+        prefPlayer2Name = sp.getString("change_player2_name","Player 2");
+        tvPlayer2.setText(prefPlayer2Name+": 0");
     }
 }
