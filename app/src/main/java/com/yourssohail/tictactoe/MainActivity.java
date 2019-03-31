@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvPlayer1,tvPlayer2;
     final int SETTINGS_ACTIVITY = 1;
     String prefPlayer1Name,prefPlayer2Name;
-    int colorId = R.color.colorPrimaryGreen;
+    int colorId ;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
