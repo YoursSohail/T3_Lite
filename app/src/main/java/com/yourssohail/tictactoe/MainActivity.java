@@ -2,14 +2,13 @@ package com.yourssohail.tictactoe;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.os.Build;
+import android.graphics.drawable.ShapeDrawable;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvPlayer1,tvPlayer2;
     final int SETTINGS_ACTIVITY = 1;
     String prefPlayer1Name,prefPlayer2Name;
+    int colorId = R.color.colorPrimaryGreen;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         tvPlayer1 = findViewById(R.id.tvPlayer1);
         tvPlayer2 = findViewById(R.id.tvPlayer2);
+
+
 
         setName();
 
@@ -67,9 +69,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 player2Points=0;
                 updatePointText();
                 resetBoard();
+                Toast.makeText(MainActivity.this, "Reset", Toast.LENGTH_SHORT).show();
             }
         });
 
+        setBackgroundColor(colorId);
     }
 
     @Override
@@ -135,6 +139,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         roundCount = 0;
         player1Turn = true;
+
+
 
     }
 
@@ -223,6 +229,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(requestCode == SETTINGS_ACTIVITY){
 
             setName();
+            setBackgroundColor(colorId);
             this.recreate();
         }
     }
@@ -233,18 +240,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if(sp.getString("color_choices","Green").equals("Green")){
             setTheme(R.style.GreenTheme);
+            colorId = R.color.colorPrimaryGreen;
 
         }else if(sp.getString("color_choices","Orange").equals("Orange")){
             setTheme(R.style.OrangeTheme);
+            colorId = R.color.colorPrimaryOrange;
 
         }else if(sp.getString("color_choices","Red").equals("Red")){
             setTheme(R.style.RedTheme);
+            colorId = R.color.colorPrimaryRed;
 
         }else if(sp.getString("color_choices","Blue").equals("Blue")){
             setTheme(R.style.BlueTheme);
+            colorId = R.color.colorPrimaryBlue;
 
         }else if(sp.getString("color_choices","Yellow").equals("Yellow")){
             setTheme(R.style.YellowTheme);
+            colorId = R.color.colorPrimaryYellow;
 
         }
     }
@@ -259,6 +271,50 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvPlayer2.setText(prefPlayer2Name+": 0");
     }
 
+    private void setBackgroundColor(int colorId){
+        Drawable background = btReset.getBackground();
+        Drawable bgTitle;
+        if (background instanceof ShapeDrawable) {
+            // cast to 'ShapeDrawable'
+            ShapeDrawable shapeDrawable = (ShapeDrawable) background;
+            shapeDrawable.getPaint().setColor(ContextCompat.getColor(this, colorId));
+        } else if (background instanceof GradientDrawable) {
+            // cast to 'GradientDrawable'
+            GradientDrawable gradientDrawable = (GradientDrawable) background;
+            gradientDrawable.setColor(ContextCompat.getColor(this,colorId));
+        } else if (background instanceof ColorDrawable) {
+            // alpha value may need to be set again after this call
+            ColorDrawable colorDrawable = (ColorDrawable) background;
+            colorDrawable.setColor(ContextCompat.getColor(this,colorId));
+        }
+
+        Button bt;
+
+        for(int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                String btId = "bt"+i+j;
+                int resId = getResources().getIdentifier(btId,"id",getPackageName());
+                bt = findViewById(resId);
+                bgTitle = bt.getBackground();
+
+                if (bgTitle instanceof ShapeDrawable) {
+                    // cast to 'ShapeDrawable'
+                    ShapeDrawable shapeDrawable = (ShapeDrawable) bgTitle;
+                    shapeDrawable.getPaint().setColor(ContextCompat.getColor(this, colorId));
+                } else if (bgTitle instanceof GradientDrawable) {
+                    // cast to 'GradientDrawable'
+                    GradientDrawable gradientDrawable = (GradientDrawable) bgTitle;
+                    gradientDrawable.setColor(ContextCompat.getColor(this,colorId));
+                } else if (bgTitle instanceof ColorDrawable) {
+                    // alpha value may need to be set again after this call
+                    ColorDrawable colorDrawable = (ColorDrawable) bgTitle;
+                    colorDrawable.setColor(ContextCompat.getColor(this,colorId));
+                }
+
+            }
+        }
+
+    }
 
 
 }
