@@ -7,4 +7,10 @@
         android:id="@+id/settings"
         app:showAsAction="ifRoom"
         android:orderInCategory="1"/>
+    <item android:title="Play"
+        android:icon="@drawable/play"
+        android:id="@+id/play"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="0"/>
+
 </menu>

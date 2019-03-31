@@ -2,10 +2,13 @@ package com.yourssohail.tictactoe;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.ShapeDrawable;
+import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -27,9 +30,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int roundCount;
     private int player1Points;
     private int player2Points;
-    private ImageView btReset;
-    private TextView tvPlayer1,tvPlayer2;
+    private ImageView btReset,ivTimer;
+    private TextView tvPlayer1,tvPlayer2,tvTimer;
     final int SETTINGS_ACTIVITY = 1;
+    private int counter = 20;;
     String prefPlayer1Name,prefPlayer2Name;
     int colorId ;
     @Override
@@ -46,6 +50,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         tvPlayer1 = findViewById(R.id.tvPlayer1);
         tvPlayer2 = findViewById(R.id.tvPlayer2);
+        tvTimer = findViewById(R.id.tvTimer);
+
+
 
 
 
@@ -56,12 +63,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String btId = "bt"+i+j;
                 int resId = getResources().getIdentifier(btId,"id",getPackageName());
                 buttons[i][j] = findViewById(resId);
-
-                buttons[i][j].setOnClickListener(this);
+                buttons[i][j].setEnabled(false);
             }
         }
 
         btReset = findViewById(R.id.btReset);
+        ivTimer = findViewById(R.id.ivTimer);
         btReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -218,6 +225,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.settings:
                 startActivityForResult(new Intent(MainActivity.this,Settings.class),SETTINGS_ACTIVITY);
                 break;
+            case R.id.play:
+
+                enableButtons();
+                new CountDownTimer(10000,1000){
+
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        if(String.valueOf(counter).length() == 2){
+                            tvTimer.setText("0:"+String.valueOf(counter));
+                            counter--;
+                        }
+                        else{
+                            tvTimer.setText("0:0"+String.valueOf(counter));
+                            counter--;
+                        }
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        tvTimer.setText("0:00");
+                        Toast.makeText(MainActivity.this, "Time over next player's turn", Toast.LENGTH_SHORT).show();
+                    }
+                }.start();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -235,6 +266,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    public void enableButtons(){
+        for(int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                String btId = "bt"+i+j;
+                int resId = getResources().getIdentifier(btId,"id",getPackageName());
+                buttons[i][j] = findViewById(resId);
+                buttons[i][j].setEnabled(true);
+                buttons[i][j].setOnClickListener(this);
+            }
+        }
+    }
 
     public void setTheme(){
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -275,6 +317,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void setBackgroundColor(int colorId){
         Drawable background = btReset.getBackground();
         Drawable bgTitle;
+
         if (background instanceof ShapeDrawable) {
             // cast to 'ShapeDrawable'
             ShapeDrawable shapeDrawable = (ShapeDrawable) background;
@@ -288,6 +331,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ColorDrawable colorDrawable = (ColorDrawable) background;
             colorDrawable.setColor(ContextCompat.getColor(this,colorId));
         }
+
+        PorterDuffColorFilter porterDuffColorFilter =new PorterDuffColorFilter(getResources().getColor(colorId), PorterDuff.Mode.SRC_ATOP);
+        ivTimer.setColorFilter(porterDuffColorFilter);
 
         Button bt;
 

@@ -33,6 +33,24 @@
             android:layout_height="wrap_content" />
 
         <ImageView
+            android:id="@+id/ivTimer"
+            android:src="@drawable/timer"
+            android:layout_toLeftOf="@+id/tvTimer"
+            android:layout_centerVertical="true"
+            android:layout_width="35sp"
+            android:layout_height="35sp" />
+
+        <TextView
+            android:id="@+id/tvTimer"
+            android:layout_width="wrap_content"
+            android:layout_toLeftOf="@+id/btReset"
+            android:textSize="25sp"
+            android:textColor="@android:color/black"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content" />
+
+        <ImageView
             android:id="@+id/btReset"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
