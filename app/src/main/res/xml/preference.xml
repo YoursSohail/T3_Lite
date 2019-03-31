@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <PreferenceCategory android:title="Change the theme">
+
+        <ListPreference
+            android:defaultValue="Green"
+            android:entries="@array/theme_options"
+            android:entryValues="@array/theme_options"
+            android:key="color_choices"
+            android:title="Choose a theme color"
+            android:summary="Choosea theme to be used throughout the application"/>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Change player names">
+
+        <EditTextPreference
+            android:defaultValue="Player 1"
+            android:key="change_player1_name"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Change player 1 name"
+            android:summary="Enter a player name to be set in place of default Player 1"/>
+        <EditTextPreference
+            android:defaultValue="Player 2"
+            android:key="change_player2_name"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Change player 2 name"
+            android:summary="Enter a player name to be set in place of default Player 2"/>
+    </PreferenceCategory>
+</PreferenceScreen>
