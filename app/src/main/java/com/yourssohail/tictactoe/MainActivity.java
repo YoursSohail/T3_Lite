@@ -38,8 +38,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setTheme();
         setContentView(R.layout.activity_main);
 
+
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Tic Tac Toe Lite");
+
 
         tvPlayer1 = findViewById(R.id.tvPlayer1);
         tvPlayer2 = findViewById(R.id.tvPlayer2);
@@ -219,6 +222,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if(requestCode == SETTINGS_ACTIVITY){
 
+            setName();
             this.recreate();
         }
     }
@@ -229,7 +233,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if(sp.getString("color_choices","Green").equals("Green")){
             setTheme(R.style.GreenTheme);
-
 
         }else if(sp.getString("color_choices","Orange").equals("Orange")){
             setTheme(R.style.OrangeTheme);
@@ -255,4 +258,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         prefPlayer2Name = sp.getString("change_player2_name","Player 2");
         tvPlayer2.setText(prefPlayer2Name+": 0");
     }
+
+
+
 }

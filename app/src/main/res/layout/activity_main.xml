@@ -9,6 +9,7 @@
     tools:context=".MainActivity">
 
     <RelativeLayout
+        android:layout_margin="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -16,6 +17,7 @@
             android:id="@+id/tvPlayer1"
             android:text="Player 1:0"
             android:textSize="30sp"
+            android:textColor="@android:color/black"
             android:freezesText="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -23,6 +25,7 @@
         <TextView
             android:layout_below="@+id/tvPlayer1"
             android:id="@+id/tvPlayer2"
+            android:textColor="@android:color/black"
             android:text="Player 2:0"
             android:textSize="30sp"
             android:freezesText="true"
@@ -48,30 +51,38 @@
         android:layout_weight="1">
 
         <Button
-
+            android:layout_margin="2dp"
             android:id="@+id/bt00"
             android:freezesText="true"
+            android:textColor="@android:color/white"
+            android:background="@color/colorPrimaryGreen"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="60sp"/>
+            android:textSize="80sp"/>
 
         <Button
+            android:layout_margin="2dp"
+            android:background="@color/colorPrimaryGreen"
             android:id="@+id/bt01"
             android:freezesText="true"
+            android:textColor="@android:color/white"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="60sp"/>
+            android:textSize="80sp"/>
 
 
         <Button
+            android:layout_margin="2dp"
             android:id="@+id/bt02"
+            android:textColor="@android:color/white"
             android:layout_width="0dp"
+            android:background="@color/colorPrimaryGreen"
             android:freezesText="true"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="60sp"/>
+            android:textSize="80sp"/>
 
     </LinearLayout>
     <LinearLayout
@@ -82,30 +93,37 @@
         <Button
             android:id="@+id/bt10"
             android:layout_width="0dp"
+            android:textColor="@android:color/white"
             android:freezesText="true"
-
+            android:background="@color/colorPrimaryGreen"
+            android:layout_margin="2dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="60sp"/>
+            android:textSize="80sp"/>
 
         <Button
             android:id="@+id/bt11"
             android:layout_width="0dp"
             android:freezesText="true"
-
+            android:layout_margin="2dp"
+            android:background="@color/colorPrimaryGreen"
+            android:textColor="@android:color/white"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="60sp"/>
+            android:textSize="80sp"/>
 
 
         <Button
             android:id="@+id/bt12"
+
             android:layout_width="0dp"
             android:freezesText="true"
-
+            android:background="@color/colorPrimaryGreen"
+            android:textColor="@android:color/white"
+            android:layout_margin="2dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="60sp"/>
+            android:textSize="80sp"/>
 
     </LinearLayout>
     <LinearLayout
@@ -116,28 +134,36 @@
         <Button
             android:id="@+id/bt20"
             android:layout_width="0dp"
+            android:textColor="@android:color/white"
             android:freezesText="true"
-
+            android:layout_margin="2dp"
             android:layout_height="match_parent"
+            android:background="@color/colorPrimaryGreen"
             android:layout_weight="1"
-            android:textSize="60sp"/>
+            android:textSize="80sp"/>
 
         <Button
             android:id="@+id/bt21"
             android:layout_width="0dp"
+            android:background="@color/colorPrimaryGreen"
             android:freezesText="true"
+            android:layout_margin="2dp"
+            android:textColor="@android:color/white"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="60sp"/>
+            android:textSize="80sp"/>
 
 
         <Button
             android:id="@+id/bt22"
+            android:layout_margin="2dp"
             android:layout_width="0dp"
+            android:textColor="@android:color/white"
+            android:background="@color/colorPrimaryGreen"
             android:freezesText="true"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="60sp"/>
+            android:textSize="80sp"/>
 
     </LinearLayout>
 
